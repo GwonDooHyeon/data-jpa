@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import study.datajpa.entity.Member;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -27,4 +29,14 @@ class MemberRepositoryTest {
         assertThat(findMember).isEqualTo(member);
     }
 
+    @Test
+    void test() {
+        Member member1 = new Member("member1", 10);
+        Member member2 = new Member("member2", 20);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        List<Member> result = memberRepository.findUser("member1", 10);
+        assertThat(result.get(0)).isEqualTo(member1);
+    }
 }
