@@ -45,7 +45,12 @@ public class MemberJpaRepository {
                         " and m.age > :age", Member.class)
                 .setParameter("username", username)
                 .setParameter("age", age).getResultList();
+    }
 
+    public int bulkAgePlus(int age) {
+        return em.createQuery("update Member m set m.age = m.age+1 where m.age >= :age")
+                .setParameter("age", age)
+                .executeUpdate();
     }
 
 }
